@@ -72,6 +72,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sensor_repo.wsgi.application'
 
+# specify the custom user model
+AUTH_USER_MODEL = 'account.CustomUser'
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

@@ -1,5 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
+
+from models import UserProfile
 
 class CustomUserManager(BaseUserManager):
     """
@@ -17,6 +19,9 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
+        # create a profile for the created user
+        user_profile = UserProfile(user=user)
+        user_profile.save()
         return user
     
     def create_superuser(self, email, password, **extra_fields):
