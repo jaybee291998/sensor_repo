@@ -3,8 +3,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from random_username.generate import generate_username
-
 
 from .managers import CustomUserManager
 # Create your models here.
@@ -22,7 +20,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-    
+
 class UserProfile(models.Model):
     
     class SexChoices(models.TextChoices):
@@ -48,6 +46,9 @@ class UserProfile(models.Model):
         null=True
     )
 
+    def __str__(self):
+        return f'{self.username} : {self.user.email}'
+
     def save(self, *args, **kwargs):
         # check a username is provided
         if self.name is None:
@@ -55,6 +56,3 @@ class UserProfile(models.Model):
             self.name = generate_username(1)[0]
         # save the model
         super().save(*args, **kwargs)
-
-
-
