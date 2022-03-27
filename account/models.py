@@ -49,10 +49,10 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.username} : {self.user.email}'
 
-    def save(self, *args, **kwargs):
+"""    def save(self, *args, **kwargs):
         # check a username is provided
         if self.name is None:
             # generate a random username
             self.name = generate_username(1)[0]
         # save the model
-        super().save(*args, **kwargs)
+        super().save(*args, **kwargs)"""
